@@ -1,6 +1,18 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99
+LDFLAGS =
 
-main:
-	gcc main.c -o main
+TARGET = scanner
+SRCS = scan.c main.c
+OBJS = $(SRCS:.c=.o)
+
+
+make: $(OBJS)
+	$(CC) $(LDFLAGS) -o scan $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm main
+	rm -f $(TARGET) $(OBJS)
+	rm scan
